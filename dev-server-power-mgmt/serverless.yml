@@ -1,0 +1,31 @@
+service: dev-server-power-mgmt
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: python3.8
+  lambdaHashingVersion: 20201221
+  profile: zdv
+  region: us-east-2
+  iam:
+    role:
+      statements:
+        - Effect: 'Allow'
+          Action:
+            - 'ec2:StartInstances'
+            - 'ec2:StopInstances'
+          Resource:
+            - '*'
+  environment:
+    DEV_INSTANCE_ID: i-0bb6fdc3ec0450b62
+
+functions:
+  start:
+    handler: handler.start
+    events:
+      - schedule: cron(0 15 * * ? *)
+  stop:
+    handler: handler.stop
+    events:
+      - schedule: cron(0 5 * * ? *)

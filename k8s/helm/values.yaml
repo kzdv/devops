@@ -1,0 +1,47 @@
+# Default values for helm.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+global:
+  hub: docker.io/denartcc
+  tag: latest
+  certmanager:
+    name: letsencrypt
+    kind: ClusterIssuer
+
+bot:
+  enabled: true
+  discordToken: ""
+  api:
+    fetchMembers: "https://www.denartcc.org/getRoster"
+
+curr-web:
+  enabled: true
+  database:
+    driver: "mysql"
+    host: "mysql.mysql.svc.cluster.local"
+    port: 3306
+    database: "artcc_site"
+    database_forum: "artcc_forum"
+    username: "web"
+    password: "web"
+  discord:
+    oauth:
+      id: "12345"
+      secret: "secret"
+  vatusa:
+    api_key: "12345"
+    uls:
+      jwk: ""
+      url_id: 1
+      redirect: "https://www.denartcc.org"
+  mail:
+    driver: "smtp"
+    host: "smtp.gmail.com"
+    port: 587
+    encryption: "tls"
+    username: "no-reply@denartcc.org"
+    password: ""
+  recaptcha:
+    key: "12345"
+    secret: ""

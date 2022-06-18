@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bot
+  labels:
+    app: bot
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bot
+  template:
+    metadata:
+      labels:
+        app: bot
+    spec:
+      containers:
+      - name: bot
+{{- if contains "/" .Values.image }}
+        image: "{{ .Values.image }}"
+{{- else }}
+        image: "{{ .Values.hub | default .Values.global.hub }}/{{ .Values.image | default "bot" }}:{{ .Values.tag | default .Values.global.tag }}"
+{{- end }}
+        imagePullPolicy: Always
+        env:
+        - name: DISCORD_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: bot-secrets
+              key: bot-token
+      restartPolicy: Always
+      resources:
+        {{ toYaml .Values.resources | trim | nindent 10 }}

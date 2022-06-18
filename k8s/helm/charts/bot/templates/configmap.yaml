@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: bot
+  namespace: {{ .Release.Namespace }}
+data:
+  config: |
+    {
+      "discord": {
+        "token": "{{ .Values.discordToken }}",
+      },
+      "api": {
+        "fetchMembers": "{{ .Values.api.fetchMembers }}"
+      }
+    }

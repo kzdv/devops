@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ .Values.ingress.tlsSecret }}-certificate
+  namespace: {{ .Release.Namespace }}
+spec:
+  secretName: {{ .Values.ingress.tlsSecret }}
+  issuerRef:
+    name: {{ .Values.global.certmanager.issuer }}
+    kind: {{ .Valuies.global.certmanager.kind | default "ClusterIssuer" }}
+  dnsNames:
+  {{ range .Values.ingress.hosts }}
+  - {{ . }}
+  {{ end }}

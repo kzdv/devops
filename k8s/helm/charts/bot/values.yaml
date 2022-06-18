@@ -1,0 +1,14 @@
+enabled: true
+hub: ""
+image: bot
+tag: latest
+
+discordToken: ""
+
+api:
+  fetchMembers: "https://www.denartcc.org/getRoster"
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 100Mi

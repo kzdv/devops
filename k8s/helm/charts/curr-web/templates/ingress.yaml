@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: curr-web
+  namespace: {{ .Release.Namespace }}
+spec:
+  ingressClassName: {{ .Values.ingress.ingressClassName | default "nginx" }}
+  rules:
+  {{- range .Values.ingress.hosts }}
+  - host: {{ . }}
+    http:
+      paths:
+      - backend:
+          service:
+            name: curr-web
+            namespace: {{ $.Release.Namespace }}
+            port:
+              number: 80
+        path: /
+        pathType: prefix
+  {{- end }}
+  tls:
+  - hosts:
+    {{- range .Values.ingress.hosts }}
+      - {{ . }}
+    {{- end }}
+    secretName: {{ .Values.ingress.tlsSecret }}

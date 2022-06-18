@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: curr-web
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: curr-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: curr-web
+  template:
+    metadata:
+      labels:
+        app: curr-web
+    spec:
+      containers:
+      - name: curr-web
+{{- if contains "/" .Values.image }}
+        image: "{{ .Values.image }}"
+{{- else }}
+        image: "{{ .Values.hub | default .Values.global.hub }}/{{ .Values.image | default "curr-web" }}:{{ .Values.tag | default .Values.global.tag }}"
+{{- end }}
+        imagePullPolicy: Always
+        envFrom:
+        - secretRef:
+            name: web-env-db
+            optional: false
+        - secretRef:
+            name: web-env-discord
+            optional: false
+        - secretRef:
+            name: web-env-vatusa
+            optional: false
+        - secretRef:
+            name: web-env-mail
+            optional: false
+        - secretRef:
+            name: web-env-recaptcha
+            optional: false
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /
+            port: http
+          initialDelaySeconds: 15
+          periodSeconds: 15
+          successThreshold: 1
+          timeoutSeconds: 1
+          failureThreshold: 3
+        livenessProbe:
+          httpGet:
+            path: /
+            port: http
+          initialDelaySeconds: 15
+          periodSeconds: 15
+          successThreshold: 1
+          timeoutSeconds: 1
+          failureThreshold: 3
+        resources:
+          {{ toYaml .Values.resources | trim | nindent 10 }}
+        volumeMounts:
+        - name: web-files
+          mountPath: {{ .Values.filesMount.containerPath }}
+  volumes:
+  - name: web-files
+    hostPath:
+      path: {{ .Values.filesMount.hostPath }}
+      typpe: {{ .Values.filesMount.hostType }}

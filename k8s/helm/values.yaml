@@ -6,8 +6,9 @@ global:
   hub: docker.io/denartcc
   tag: latest
   certmanager:
-    name: letsencrypt
-    kind: ClusterIssuer
+    issuer:
+      name: letsencrypt
+      kind: ClusterIssuer
 
 bot:
   enabled: true

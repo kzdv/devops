@@ -26,3 +26,11 @@ appVersion: "1.0.0"
 dependencies:
   - name: "bot"
     condition: bot.enabled
+    import-values:
+    - child: bot
+      parent: bot
+  - name: "curr-web"
+    condition: curr-web.enabled
+    import-values:
+    - child: curr-web
+      parent: curr-web

@@ -4,7 +4,6 @@ metadata:
   name: curr-web
   namespace: {{ .Release.Namespace }}
 spec:
-  ipFamily: ipv4
   ports:
   - name: http
     port: 80

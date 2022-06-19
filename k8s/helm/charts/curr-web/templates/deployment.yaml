@@ -25,6 +25,9 @@ spec:
         imagePullPolicy: Always
         envFrom:
         - secretRef:
+            name: web-env-app-key
+            optional: false
+        - secretRef:
             name: web-env-db
             optional: false
         - secretRef:
@@ -45,7 +48,7 @@ spec:
           protocol: TCP
         readinessProbe:
           httpGet:
-            path: /
+            path: /health.php
             port: http
           initialDelaySeconds: 15
           periodSeconds: 15
@@ -54,9 +57,8 @@ spec:
           failureThreshold: 3
         livenessProbe:
           httpGet:
-            path: /
+            path: /health.php
             port: http
-          initialDelaySeconds: 15
           periodSeconds: 15
           successThreshold: 1
           timeoutSeconds: 1
@@ -66,8 +68,8 @@ spec:
         volumeMounts:
         - name: web-files
           mountPath: {{ .Values.filesMount.containerPath }}
-  volumes:
-  - name: web-files
-    hostPath:
-      path: {{ .Values.filesMount.hostPath }}
-      typpe: {{ .Values.filesMount.hostType }}
+      volumes:
+      - name: web-files
+        hostPath:
+          path: {{ .Values.filesMount.hostPath }}
+          type: {{ .Values.filesMount.hostType }}

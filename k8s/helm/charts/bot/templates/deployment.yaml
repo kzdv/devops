@@ -23,6 +23,8 @@ spec:
         image: "{{ .Values.hub | default .Values.global.hub }}/{{ .Values.image | default "bot" }}:{{ .Values.tag | default .Values.global.tag }}"
 {{- end }}
         imagePullPolicy: Always
+        resources:
+          {{ toYaml .Values.resources | trim | nindent 10 }}
         env:
         - name: DISCORD_TOKEN
           valueFrom:
@@ -30,5 +32,3 @@ spec:
               name: bot-secrets
               key: bot-token
       restartPolicy: Always
-      resources:
-        {{ toYaml .Values.resources | trim | nindent 10 }}

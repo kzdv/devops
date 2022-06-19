@@ -13,11 +13,10 @@ spec:
       - backend:
           service:
             name: curr-web
-            namespace: {{ $.Release.Namespace }}
             port:
               number: 80
         path: /
-        pathType: prefix
+        pathType: Prefix
   {{- end }}
   tls:
   - hosts:

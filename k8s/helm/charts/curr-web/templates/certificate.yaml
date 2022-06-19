@@ -6,8 +6,8 @@ metadata:
 spec:
   secretName: {{ .Values.ingress.tlsSecret }}
   issuerRef:
-    name: {{ .Values.global.certmanager.issuer }}
-    kind: {{ .Valuies.global.certmanager.kind | default "ClusterIssuer" }}
+    name: {{ .Values.global.certmanager.issuer.name }}
+    kind: {{ .Values.global.certmanager.issuer.kind | default "ClusterIssuer" }}
   dnsNames:
   {{ range .Values.ingress.hosts }}
   - {{ . }}

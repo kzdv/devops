@@ -1,0 +1,55 @@
+enabled: true
+hub: ""
+image: curr-web
+tag: ""
+
+appkey: ""
+
+ingress:
+  ingressClassName: "nginx"
+  hosts:
+  - "www.denartcc.org"
+  - "denartcc.org"
+  tlsSecret: "curr-web-tls"
+
+database:
+  driver: "mysql"
+  host: "mysql.mysql.svc.cluster.local"
+  port: 3306
+  database: "artcc_site"
+  database_forum: "artcc_forum"
+  username: "web"
+  password: "web"
+discord:
+  oauth:
+    id: "12345"
+    secret: "secret"
+vatusa:
+  api_key: "12345"
+  uls:
+    jwk: "a"
+    url_id: 1
+    redirect: "https://www.denartcc.org"
+mail:
+  driver: "smtp"
+  host: "smtp.gmail.com"
+  port: 587
+  encryption: "tls"
+  username: "no-reply@denartcc.org"
+  password: ""
+recaptcha:
+  key: "12345"
+  secret: ""
+
+resources:
+  requests:
+    cpu: 250m
+    memory: 256Mi
+
+# This is because we aren't using a CDN
+# New site will use external storage so we don't
+# have to do this
+filesMount:
+  hostPath: "/opt/curr-web/files"
+  hostType: "Directory"
+  containerPath: "/app/public/files"

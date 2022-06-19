@@ -1,0 +1,13 @@
+enabled: true
+hub: ""
+image: "flight-parser"
+tag: ""
+
+database:
+  host: "mysql.mysql.svc.cluster.local"
+  port: 3306
+  database: "prod_v2"
+  username: "web"
+  password: "web"
+
+resources: {}

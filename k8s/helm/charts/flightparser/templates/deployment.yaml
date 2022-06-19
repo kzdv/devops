@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flight-parser
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: flight-parser
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flight-parser
+  template:
+    metadata:
+      labels:
+        app: flight-parser
+    spec:
+      containers:
+      - name: flight-parser
+{{- if contains "/" .Values.image }}
+        image: "{{ .Values.image }}"
+{{- else }}
+        image: "{{ .Values.hub | default .Values.global.hub }}/{{ .Values.image | default "flight-parser" }}:{{ .Values.tag | default .Values.global.tag }}"
+{{- end }}
+        imagePullPolicy: Always
+        envFrom:
+        - secretRef:
+            name: flight-parser-env-db
+            optional: false
+        resources:
+          {{ toYaml .Values.resources | trim | nindent 10 }}

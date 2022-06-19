@@ -1,15 +1,15 @@
-bot:
-  enabled: true
-  hub: ""
-  image: bot
-  tag: ""
 
-  discordToken: ""
+enabled: true
+hub: ""
+image: bot
+tag: ""
 
-  api:
-    fetchMembers: "https://www.denartcc.org/getRoster"
+discordToken: ""
 
-  resources:
-    requests:
-      cpu: 100m
-      memory: 100Mi
+api:
+  fetchMembers: "https://www.denartcc.org/getRoster"
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 100Mi

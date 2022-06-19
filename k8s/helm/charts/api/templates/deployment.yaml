@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+      - name: api
+{{- if contains "/" .Values.image }}
+        image: "{{ .Values.image }}"
+{{- else }}
+        image: "{{ .Values.hub | default .Values.global.hub }}/{{ .Values.image | default "api" }}:{{ .Values.tag | default .Values.global.tag }}"
+{{- end }}
+        imagePullPolicy: Always
+        envFrom:
+        - secretRef:
+            name: api-env-db
+            optional: false
+        - secretRef:
+            name: api-env-discord
+            optional: false
+        - secretRef:
+            name: api-env-vatusa
+            optional: false
+        - secretRef:
+            name: api-env-mail
+            optional: false
+        ports:
+        - containerPort: 3000
+          name: http
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /live/ping
+            port: http
+          initialDelaySeconds: 15
+          periodSeconds: 15
+          successThreshold: 1
+          timeoutSeconds: 1
+          failureThreshold: 3
+        livenessProbe:
+          httpGet:
+            path: /live/ping
+            port: http
+          periodSeconds: 15
+          successThreshold: 1
+          timeoutSeconds: 1
+          failureThreshold: 3
+        resources:
+          {{ toYaml .Values.resources | trim | nindent 10 }}

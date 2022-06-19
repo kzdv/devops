@@ -1,0 +1,41 @@
+enabled: true
+hub: ""
+image: api
+tag: ""
+
+appkey: ""
+
+ingress:
+  ingressClassName: "nginx"
+  hosts:
+  - "api.denartcc.org"
+  tlsSecret: "api-tls"
+
+database:
+  host: "mysql.mysql.svc.cluster.local"
+  port: 3306
+  database: "prod_v2"
+  username: "web"
+  password: "web"
+discord:
+  oauth:
+    id: "12345"
+    secret: "secret"
+vatusa:
+  api_key: "12345"
+  uls:
+    jwk: ""
+    url_id: 1
+    redirect: "https://www.denartcc.org"
+mail:
+  driver: "smtp"
+  host: "smtp.gmail.com"
+  port: 587
+  encryption: "tls"
+  username: "no-reply@denartcc.org"
+  password: ""
+
+resources:
+  requests:
+    cpu: 250m
+    memory: 256Mi

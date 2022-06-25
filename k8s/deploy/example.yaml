@@ -1,0 +1,86 @@
+global:
+  hub: docker.io/denartcc
+  tag: dev
+  certmanager:
+    name: letsencrypt
+    kind: ClusterIssuer
+
+api:
+  enabled: true
+  database:
+    driver: "mysql"
+    host: "mysql.mysql.svc.cluster.local"
+    port: 3306
+    database: ""
+    username: ""
+    password: ""
+  discord:
+    oauth:
+      id: ""
+      secret: ""
+  vatusa:
+    api_key: ""
+    uls:
+      jwk: ''
+      url_id: 1
+      redirect: "https://www.denartcc.org"
+  mail:
+    driver: "smtp"
+    host: "smtp.gmail.com"
+    port: 587
+    encryption: "tls"
+    username: ""
+    password: ""
+  ingress:
+    hosts:
+    - api.dev.denartcc.org
+
+bot:
+  enabled: false
+  discordToken: ""
+  api:
+    fetchMembers: ""
+
+currWeb:
+  enabled: true
+  appkey: ""
+  database:
+    driver: "mysql"
+    host: "mysql.mysql.svc.cluster.local"
+    port: 3306
+    database: ""
+    database_forum: ""
+    username: ""
+    password: ""
+  discord:
+    oauth:
+      id: ""
+      secret: ""
+  vatusa:
+    api_key: ""
+    uls:
+      jwk: ''
+      url_id: 1
+      redirect: "https://www.denartcc.org"
+  mail:
+    driver: "smtp"
+    host: "smtp.gmail.com"
+    port: 587
+    encryption: "tls"
+    username: ""
+    password: ""
+  recaptcha:
+    key: ""
+    secret: ""
+  ingress:
+    hosts:
+    - www.dev.denartcc.org
+
+flightparser:
+  enabled: true
+  database:
+    host: "mysql.mysql.svc.cluster.local"
+    port: 3306
+    database: ""
+    username: ""
+    password: ""

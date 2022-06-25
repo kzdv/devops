@@ -1,3 +1,3 @@
 # devops
 
-A bunch of devops related things for the zdv website/AWS account
+Tools and configuration to manage the ZDV environment.

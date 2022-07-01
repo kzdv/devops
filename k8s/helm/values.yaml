@@ -98,3 +98,21 @@ api:
     requests:
       cpu: 250m
       memory: 256Mi
+
+auth:
+  enabled: true
+  database:
+    host: "mysql.mysql.svc.cluster.local"
+    port: 3306
+    database: "prod_v2"
+    username: "web"
+    password: "web"
+  oauth:
+    client_id: "12345"
+    client_secret: "secret"
+    base_url: "https://auth.vatsim.net"
+    authorize_path: "/oauth/authorize"
+    token_path: "/oauth/token"
+    userinfo_path: "/api/user"
+    scopes: "full_name email"
+  jwks: ''

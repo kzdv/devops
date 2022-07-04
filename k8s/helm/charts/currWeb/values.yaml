@@ -21,6 +21,11 @@ database:
   username: "web"
   password: "web"
 discord:
+  logo: "https://cdn.denartcc.org/assets/img/logo512.png"
+  webhooks:
+    events_announcements: ""
+    staffup: ""
+    default: ""
   oauth:
     id: "12345"
     secret: "secret"

@@ -1,0 +1,46 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: mysql-backup
+  namespace: mysql
+spec:
+  schedule: "0 0 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+          - name: "backup"
+            image: denartcc/cli:v1.1.2-1
+            imagePullPolicy: Always
+            command:
+            - /bin/bash
+            - -c
+            - |
+              set -e
+              mkdir ~/.aws
+              cat <<EOF >~/.aws/config
+              [default]
+              output = json
+              region = us-east-1
+              EOF
+              cat <<EOF >~/.aws/credentials
+              [default]
+              aws_access_key_id = ${AWS_ACCESS_KEY}
+              aws_secret_access_key = ${AWS_SECRET_KEY}
+              EOF
+              set -x
+              bktime=$(date +%Y-%m-%d-%H-%M-%S)
+              mkdir /tmp/backups
+              pushd /tmp/backups
+              databases=(prod_site prod_v2 dev_v2 prod_forum)
+              for db in "${databases[@]}"; do
+                mysqldump -h "$MYSQL_HOST" -u "$MYSQL_USER" "$db" > "$db.sql"
+              done
+              tar -czf ../backup-$bktime.tgz .
+              aws s3 --endpoint=https://${AWS_ENDPOINT} cp ../backup-$bktime.tgz s3://${AWS_BUCKET}/mysql/backup-$bktime.tgz
+            envFrom:
+            - secretRef:
+                name: mysql-backup-credentials
+                optional: false

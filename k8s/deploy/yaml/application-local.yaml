@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kzdv-local
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+
+  resources:
+    repoURL: https://github.com/kzdv/devops.git
+    targetRevision: main
+    path: k8s/gitops/overlays/local
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: nextgen  # Default namespace
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: false

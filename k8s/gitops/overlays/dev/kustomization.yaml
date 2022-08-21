@@ -2,12 +2,12 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
 - ../../base
-- api/secret-db.yaml
-- api/secret-discord.yaml
-- api/secret-email.yaml
-- api/secret-oauth.yaml
-- api/secret-rabbitmq.yaml
-- api/secret-session.yaml
+- api/sealed-secret-db.yaml
+- api/sealed-secret-discord.yaml
+- api/sealed-secret-email.yaml
+- api/sealed-secret-oauth.yaml
+- api/sealed-secret-rabbitmq.yaml
+- api/sealed-secret-session.yaml
 images:
 - name: denartcc/api
   newName: denartcc/api

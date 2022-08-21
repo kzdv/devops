@@ -27,7 +27,7 @@ To deploy with expected settings:
 
 ```bash
 kubectl create namespace mysql
-kubectl create secret generic passwords -n mysql --from-literal=mysql-root-password=root --from-literal=mysql-user-password=password
+kubectl create secret generic passwords -n mysql --from-literal=mysql-root-password=root --from-literal=mysql-password=password
 
 cat <<EOF >/tmp/mysql.values.yaml
 auth:

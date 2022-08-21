@@ -9,6 +9,9 @@ resources:
 - api/secret-rabbitmq.yaml
 - api/secret-session.yaml
 images:
+- name: denartcc/api
+  newName: denartcc/api
+  newTag: 8f32cf33
 - name: denartcc/api:411c810
   newName: denartcc/api
   newTag: fe44c92

@@ -8,9 +8,9 @@ metadata:
 spec:
   project: default
 
-  resources:
+  source:
     repoURL: https://github.com/kzdv/devops.git
-    targetRevision: main
+    targetRevision: master
     path: k8s/gitops/overlays/dev
 
   destination:

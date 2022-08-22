@@ -3,6 +3,7 @@ kind: Kustomization
 metadata:
   name: base-kzdv
 resources:
+- namespace.yaml
 - cert-manager/cluster-issuer.yaml
 - api/certificate.yaml
 - api/configmap.yaml

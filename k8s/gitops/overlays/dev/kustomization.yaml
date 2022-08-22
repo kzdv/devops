@@ -8,6 +8,7 @@ resources:
 - api/sealed-secret-oauth.yaml
 - api/sealed-secret-rabbitmq.yaml
 - api/sealed-secret-session.yaml
+- api/sealed-secret-storage.yaml
 images:
 - name: denartcc/api
   newName: denartcc/api

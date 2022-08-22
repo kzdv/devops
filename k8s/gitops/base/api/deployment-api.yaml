@@ -40,6 +40,9 @@ spec:
         - secretRef:
             name: aping-email
             optional: false
+        - secretRef:
+            name: aping-storage
+            optional: false
         command: ["/bin/bash"]
         args: ["/app/init.sh"]
         volumeMounts:

@@ -43,8 +43,14 @@ spec:
         - secretRef:
             name: aping-storage
             optional: false
-        command: ["/bin/bash"]
-        args: ["/app/init.sh"]
+        command:
+        - /bin/bash
+        - -c
+        - |-
+          /bin/bash /app/init.sh
+          echo "Config:"
+          echo ""
+          cat /etc/zdv-api/config.yaml
         volumeMounts:
         - name: config
           mountPath: /etc/zdv-api

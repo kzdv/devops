@@ -52,7 +52,7 @@ data:
       base_URL: "https://auth.denartcc.org"
       endpoints:
         token: "/oauth/token"
-        user: "/oauth/user"
+        user: "/v1/info"
         authorize: "/oauth/authorize"
       client_id: "{{.OAUTH_CLIENT_ID | default "zdv"}}"
       client_secret: "{{.OAUTH_CLIENT_SECRET | default "zdv"}}"

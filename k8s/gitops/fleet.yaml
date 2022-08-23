@@ -1,16 +1,13 @@
-defaultNamespace: nextgen
 targetCustomizations:
 - name: dev
   clusterSelector:
     matchLabels:
       env: dev
-  defaultNamespace: nextgen
   kustomize:
     dir: overlays/dev
 - name: prod
   clusterSelector:
     matchLabels:
       env: prod
-  defaultNamespace: nextgen
   kustomize:
     dir: overlays/prod

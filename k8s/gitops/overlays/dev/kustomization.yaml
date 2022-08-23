@@ -12,7 +12,7 @@ resources:
 images:
 - name: denartcc/api
   newName: denartcc/api
-  newTag: ea3d182
+  newTag: 475df82
 patchesStrategicMerge:
 - api/merge/certificate.yaml
 - api/merge/ingress.yaml

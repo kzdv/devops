@@ -1,6 +1,6 @@
 # Cluster Deployment
 
-This deploys ArgoCD and the Application YAML to the current kubectl context for the KZDV web applications.
+This deploys Fleet and the Application YAML to the current kubectl context for the KZDV web applications.
 
 ## Pre-requisites
 
@@ -104,27 +104,30 @@ helm install \
   --set installCRDs=true
 ```
 
-## Deploy Application
+## Deploy Fleet
 
-To deploy:
+Deploy Fleet to the current kubectl context. We use fleet as a single-cluster GitOps tool to manage application deployments for the local cluster.
 
 ```bash
-./deploy.sh <dev|prod>
+helm -n cattle-fleet-system install --create-namespace --wait fleet-crd https://github.com/rancher/fleet/releases/download/v0.3.10/fleet-crd-0.3.10.tgz
+helm -n cattle-fleet-system install --create-namespace --wait fleet https://github.com/rancher/fleet/releases/download/v0.3.10/fleet-0.3.10.tgz
 ```
 
-This will deploy ArgoCD and the Application YAML to the current kubectl context. This will cause the web application to be deployed
- by Argo over time and maintained against this repository.
+Once fleet has been installed, label your current cluster:
 
- ### Local Development
+```bash
+kubectl label clusters.fleet.cattle.io -n fleet-local local env=local
+```
 
- For local environments, the secrets will not be deployed to the cluster as they are sealed. Templates can be found in yaml/local-secrets. Please populate and deploy those into the cluster.
+Replace local in the above with the appropriate environment: prod, dev, local. This label instructs Fleet which Kustomize overlay to use.
 
- To deploy:
+## Define GitRepo
 
- ```yaml
- kubectl apply -f yaml/local-secrets.yaml
- ```
+Deploy the GitRepo for your environment.
 
- Ingress' will be configured to use denartcc.local. Please use a local DNS server to resolve the domain appropriately. Certificates will be self-signed.
+```bash
+kubectl apply -f yaml/fleet-gitrepo.yaml
+```
 
- ArgoCD is setup to not self-heal local environments. So it will not attempt to undo your changes. However, if a change is made to the git repository, local changes will be lost. Local's kustomization is only changed if manifest changes are needed or a big update is made to any resource, so this is unlikely.
+Note: On initial rollout, deployments may initially fail to start. This is due to them being created before the secrets have been unsealed and applied to the namespace. This can be
+ignored unless it persists.

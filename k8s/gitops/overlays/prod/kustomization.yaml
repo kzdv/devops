@@ -12,5 +12,3 @@ images:
 - name: denartcc/api:411c810
   newName: denartcc/api
   newTag: fe44c92
-patchesStrategicMerge:
-- api/merge/certificate.yaml

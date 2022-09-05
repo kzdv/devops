@@ -6,6 +6,7 @@ resources:
 - api/sealed-secret-discord.yaml
 - api/sealed-secret-email.yaml
 - api/sealed-secret-oauth.yaml
+- api/sealed-secret-redis.yaml
 - api/sealed-secret-rabbitmq.yaml
 - api/sealed-secret-session.yaml
 - api/sealed-secret-storage.yaml

@@ -79,6 +79,16 @@ kubectl apply -n rabbitmq -f /tmp/rabbitmq.secret.yaml
 kubectl apply -n rabbitmq -f yaml/rabbitmq/
 ```
 
+### Redis deployment
+
+Install via:
+
+```bash
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo update
+helm upgrade --install redis bitnami/redis -n redis --create-namespace --set sentinel.enabled=true --set sentinel.masterSet=master --set auth.sentinel=false
+```
+
 ### Ingress-nginx Deployment
 
 Install via:

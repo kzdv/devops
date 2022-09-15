@@ -37,7 +37,7 @@ data:
         - "{{.REDIS_SENTINEL_HOST | default "redis.redis.svc.cluster.local:26379"}}"
     session:
       cookie:
-        name: "zdv_session"
+        name: "{{.SESSION_NAME | default "zdv_session"}}"
         key: "{{.SESSION_KEY | default "zdv_session"}}"
         max_age: 604800
         domain: "{{.SESSION_DOMAIN | default ".denartcc.org"}}"

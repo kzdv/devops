@@ -3,11 +3,10 @@ kind: Kustomization
 resources:
 - ../../base
 images:
-- name: denartcc/api:411c810
+- name: denartcc/api
   newName: denartcc/api
-  newTag: fe44c92
+  newTag: 945f1f4
 patchesStrategicMerge:
-- api/merge/certificate.yaml
 - api/merge/ingress.yaml
 patchesJson6902:
   - path: cluster-manager/cluster-issuer-path.yaml

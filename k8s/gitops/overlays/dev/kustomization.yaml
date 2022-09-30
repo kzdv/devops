@@ -13,7 +13,7 @@ resources:
 images:
 - name: denartcc/api
   newName: denartcc/api
-  newTag: 4eb3cba
+  newTag: 864bce8
 patchesStrategicMerge:
 - api/merge/certificate.yaml
 - api/merge/ingress.yaml

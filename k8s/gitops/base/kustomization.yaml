@@ -8,6 +8,5 @@ resources:
 - api/certificate.yaml
 - api/configmap.yaml
 - api/deployment-api.yaml
-- api/deployment-runner.yaml
 - api/service.yaml
 - api/ingress.yaml

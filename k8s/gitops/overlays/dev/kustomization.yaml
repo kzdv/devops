@@ -10,6 +10,7 @@ resources:
 - api/sealed-secret-rabbitmq.yaml
 - api/sealed-secret-session.yaml
 - api/sealed-secret-storage.yaml
+- api/sealed-secret-vatusa.yaml
 images:
 - name: denartcc/api
   newName: adhp/api

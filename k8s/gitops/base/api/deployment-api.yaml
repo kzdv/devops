@@ -44,6 +44,8 @@ spec:
         - secretRef:
             name: aping-storage
             optional: false
+        - secretRef:
+            name: aping-vatusa
         command:
         - /bin/bash
         - -c

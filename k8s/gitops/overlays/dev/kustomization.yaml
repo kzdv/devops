@@ -12,8 +12,8 @@ resources:
 - api/sealed-secret-storage.yaml
 images:
 - name: denartcc/api
-  newName: denartcc/api
-  newTag: ff4f522
+  newName: adhp/api
+  newTag: 7951ec2
 patchesStrategicMerge:
 - api/merge/certificate.yaml
 - api/merge/ingress.yaml

@@ -16,6 +16,7 @@ spec:
       initContainers:
       - name: config
         image: denartcc/api:fe44c92
+        imagePullPolicy: Always
         env:
         - name: CONFIGMAP_PATH
           value: /tmp/config-map/config.yaml
@@ -62,6 +63,7 @@ spec:
       containers:
       - name: api
         image: denartcc/api:fe44c92
+        imagePullPolicy: Always
         ports:
         - containerPort: 3000
           protocol: TCP

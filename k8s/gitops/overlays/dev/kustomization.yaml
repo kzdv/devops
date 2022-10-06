@@ -14,7 +14,7 @@ resources:
 images:
 - name: denartcc/api
   newName: adhp/api
-  newTag: 70e1698
+  newTag: 489e334
 patchesStrategicMerge:
 - api/merge/certificate.yaml
 - api/merge/ingress.yaml

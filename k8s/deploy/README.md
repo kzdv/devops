@@ -48,47 +48,6 @@ rm /tmp/mysql.values.yaml
 
 **NOTE**: The credentials used by the applications are sealed in secrets. If you are not going to use those passwords, please regenerate the sealed secrets in this repo.
 
-### RabbitMQ Deployment
-
-To deploy with expected settings:
-
-Create a secret, set these values.
-
-**NOTE**: The credentials used by the applications are sealed in secrets. If you are not going to use those passwords, please regenerate the sealed secrets in this repo.
-
-```bash
-cat <<EOF >/tmp/rabbitmq.secret.yaml
-apiVersion: v1
-kind: Secret
-type: Opaque
-metadata:
-  name: rabbit-secret
-  namespace: rabbitmq
-stringData:
-  RABBITMQ_ERLANG_COOKIE: ""
-  RABBITMQ_PASS: ""
-  RABBITMQ_USER: ""
-EOF
-```
-
-Now install:
-
-```bash
-kubectl create namespace rabbitmq
-kubectl apply -n rabbitmq -f /tmp/rabbitmq.secret.yaml
-kubectl apply -n rabbitmq -f yaml/rabbitmq/
-```
-
-### Redis deployment
-
-Install via:
-
-```bash
-helm repo add bitnami https://charts.bitnami.com/bitnami
-helm repo update
-helm upgrade --install redis bitnami/redis -n redis --create-namespace --set sentinel.enabled=true --set sentinel.masterSet=master --set auth.sentinel=false
-```
-
 ### Ingress-nginx Deployment
 
 Install via:

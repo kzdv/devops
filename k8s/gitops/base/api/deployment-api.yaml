@@ -47,6 +47,8 @@ spec:
             optional: false
         - secretRef:
             name: aping-vatusa
+        - secretRef:
+            name: aping-discord
         command:
         - /bin/bash
         - -c

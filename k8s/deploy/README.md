@@ -78,8 +78,8 @@ helm install \
 Deploy Fleet to the current kubectl context. We use fleet as a single-cluster GitOps tool to manage application deployments for the local cluster.
 
 ```bash
-helm -n cattle-fleet-system install --create-namespace --wait fleet-crd https://github.com/rancher/fleet/releases/download/v0.3.10/fleet-crd-0.3.10.tgz
-helm -n cattle-fleet-system install --create-namespace --wait fleet https://github.com/rancher/fleet/releases/download/v0.3.10/fleet-0.3.10.tgz
+helm -n cattle-fleet-system install --create-namespace --wait fleet-crd https://github.com/rancher/fleet/releases/download/v0.3.11/fleet-crd-0.3.11.tgz
+helm -n cattle-fleet-system install --create-namespace --wait fleet https://github.com/rancher/fleet/releases/download/v0.3.11/fleet-0.3.11.tgz
 ```
 
 Once fleet has been installed, label your current cluster:

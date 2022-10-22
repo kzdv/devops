@@ -11,7 +11,7 @@ resources:
 images:
 - name: denartcc/api
   newName: adhp/api
-  newTag: 6711e3a
+  newTag: main-073209f
 - name: denartcc/api:411c810
   newName: denartcc/api
   newTag: fe44c92
